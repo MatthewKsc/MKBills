@@ -1,5 +1,7 @@
-package com.matthewksc.billlogic;
+package com.matthewksc.billlogic.Controllers;
 
+import com.matthewksc.billlogic.dao.entity.Bill;
+import com.matthewksc.billlogic.Services.BillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

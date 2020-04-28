@@ -1,4 +1,4 @@
-package com.matthewksc.billlogic;
+package com.matthewksc.billlogic.dao.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
