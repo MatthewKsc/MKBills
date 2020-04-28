@@ -9,6 +9,7 @@ import java.util.Optional;
 
 @RestController
 @CrossOrigin(origins = "*")
+@RequestMapping("/bill")
 public class BillController {
 
     private BillService billService;
