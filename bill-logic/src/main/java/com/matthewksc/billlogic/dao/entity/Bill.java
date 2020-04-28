@@ -1,8 +1,6 @@
 package com.matthewksc.billlogic.dao.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Bill {
@@ -11,7 +9,10 @@ public class Bill {
     @GeneratedValue
     private Long bill_id;
     private String Tittle;
+
+    @Enumerated(EnumType.STRING)
     private Category category;
+
     private Double Price;
     private String Description;
 
