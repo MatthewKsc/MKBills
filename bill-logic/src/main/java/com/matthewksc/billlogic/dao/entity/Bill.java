@@ -9,10 +9,8 @@ public class Bill {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bill_id;
     private String Tittle;
-
     @Enumerated(EnumType.STRING)
     private Category category;
-
     private Double Price;
     private String Description;
 

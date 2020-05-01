@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: security
+eureka:
+  client:
+    service-url:
+      defualtZone: http://localhost:8761/eureka
