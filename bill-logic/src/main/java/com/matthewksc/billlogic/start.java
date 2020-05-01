@@ -1,7 +1,7 @@
 package com.matthewksc.billlogic;
 
 import com.matthewksc.billlogic.dao.BillRepository;
-import com.matthewksc.billlogic.dao.UserRepo;
+import com.matthewksc.billlogic.dao.UserRepository;
 import com.matthewksc.billlogic.dao.entity.Bill;
 import com.matthewksc.billlogic.dao.entity.Category;
 import com.matthewksc.billlogic.dao.entity.Role;
@@ -15,7 +15,7 @@ import java.util.List;
 public class start {
 
     //todo for now class to test data is passing
-    public start(BillRepository billRepository, UserRepo userRepo) {
+    public start(BillRepository billRepository, UserRepository userRepository) {
         User mati = new User();
         mati.setUsername("matthew");
         mati.setPassword("matthew123");
@@ -40,7 +40,7 @@ public class start {
         bills.add(bill1);
         bills.add(bill2);
         mati.setBills(bills);
-        userRepo.save(mati);
+        userRepository.save(mati);
 
         billRepository.save(bill1);
         billRepository.save(bill2);
