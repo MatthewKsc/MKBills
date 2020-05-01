@@ -8,6 +8,7 @@
       <list>
         <option value="$PROJECT_DIR$/bill-logic/pom.xml" />
         <option value="$PROJECT_DIR$/service-registration/pom.xml" />
+        <option value="$PROJECT_DIR$/security/pom.xml" />
       </list>
     </option>
   </component>

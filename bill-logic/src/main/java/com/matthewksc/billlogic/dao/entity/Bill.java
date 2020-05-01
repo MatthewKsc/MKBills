@@ -6,7 +6,7 @@ import javax.persistence.*;
 public class Bill {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bill_id;
     private String Tittle;
 
