@@ -1,7 +1,7 @@
 package com.matthewksc.billlogic.Services;
 
-import com.matthewksc.billlogic.dao.entity.Bill;
-import com.matthewksc.billlogic.dao.BillRepository;
+import com.matthewksc.billlogic.Dao.entity.Bill;
+import com.matthewksc.billlogic.Dao.BillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

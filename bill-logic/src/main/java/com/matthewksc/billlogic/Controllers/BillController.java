@@ -1,10 +1,12 @@
 package com.matthewksc.billlogic.Controllers;
 
-import com.matthewksc.billlogic.dao.entity.Bill;
+import com.matthewksc.billlogic.Dao.UserRepository;
+import com.matthewksc.billlogic.Dao.entity.Bill;
 import com.matthewksc.billlogic.Services.BillService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -12,10 +14,12 @@ import java.util.Optional;
 public class BillController {
 
     private BillService billService;
+    private UserRepository userRepository;
 
     @Autowired
-    public BillController(BillService billService) {
+    public BillController(BillService billService, UserRepository userRepository) {
         this.billService = billService;
+        this.userRepository = userRepository;
     }
 
     @GetMapping
@@ -23,10 +27,10 @@ public class BillController {
         return billService.findAll();
     }
 
-    @GetMapping("/{id}")
-    public Optional<Bill> getById(@PathVariable Long id){
-        return billService.findById(id);
-    }
+//    @GetMapping("/{id}")
+//    public Optional<Bill> getById(@PathVariable Long id){
+//        return billService.findById(id);
+//    }
 
     @PostMapping("/design")
     public Bill addBill(@RequestBody Bill bill){
@@ -41,5 +45,11 @@ public class BillController {
     @DeleteMapping
     public void deleteBill(Long id){
         billService.delete(id);
+    }
+
+    //for now listing bills for user
+    @GetMapping("/{userID}")
+    public Optional<List<Bill>> userBills(@PathVariable Long userID){
+        return userRepository.findById(userID).map(user -> user.getBills());
     }
 }

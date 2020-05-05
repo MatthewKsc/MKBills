@@ -1,22 +1,27 @@
 package com.matthewksc.billlogic.Controllers;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller
-@RequestMapping("/")
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
 public class MainController {
 
     //todo main said for now for security
-    @GetMapping
+    @GetMapping("/main")
     public String main(){
-        return "Hello";
+        return "Main";
     }
 
     //todo control panel for admin
     @GetMapping("/admin")
     public String admin(){
         return "Admin";
+    }
+
+    //todo token jwt
+    @GetMapping("/authenticated")
+    public String getToken(){
+        return "authenticated";
     }
 }

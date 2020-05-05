@@ -1,4 +1,4 @@
-package com.matthewksc.billlogic.dao.entity;
+package com.matthewksc.billlogic.Dao.entity;
 
 import javax.persistence.*;
 
