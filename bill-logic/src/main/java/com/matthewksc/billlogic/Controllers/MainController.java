@@ -15,7 +15,7 @@ public class MainController {
     }
 
     //todo control panel for admin
-    @GetMapping("/admin/controlPanel")
+    @GetMapping("/admin")
     public String admin(){
         return "Admin";
     }

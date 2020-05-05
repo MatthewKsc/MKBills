@@ -1,13 +1,11 @@
 package com.matthewksc.billlogic.dao.entity;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 @Entity
 public class User implements UserDetails {
@@ -15,17 +13,13 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long user_id;
-
     private String username;
     private String password;
-
     @Enumerated(EnumType.STRING)
     private Role role;
-
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_user", referencedColumnName = "user_id")
     private List<Bill> bills = new ArrayList<>();
-
     private String email;
     private String country;
     private String address;
@@ -50,18 +44,9 @@ public class User implements UserDetails {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    public void setUsername(String username) { this.username = username; }
 
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
-
-    public String getPassword() {
-        return password;
-    }
+    public String getPassword() { return password; }
 
     public void setPassword(String password) {
         this.password = password;
@@ -98,6 +83,12 @@ public class User implements UserDetails {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Arrays.asList(new SimpleGrantedAuthority(role.toString()));
+    }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;

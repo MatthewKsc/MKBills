@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "*")
 @RequestMapping("/bill")
 public class BillController {
 
@@ -25,7 +24,7 @@ public class BillController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Bill> getById(@RequestParam Long id){
+    public Optional<Bill> getById(@PathVariable Long id){
         return billService.findById(id);
     }
 
