@@ -23,6 +23,7 @@ public class User{
     private String email;
     private String country;
     private String address;
+    private boolean isEnable;
 
     public Long getUser_id() {
         return user_id;
@@ -86,6 +87,14 @@ public class User{
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public boolean isEnable() {
+        return isEnable;
+    }
+
+    public void setEnable(boolean enable) {
+        isEnable = enable;
     }
 
     @Override

@@ -13,9 +13,11 @@ public class MyUserDetails implements UserDetails {
 
     private String username;
     private String password;
+    private boolean isEnabled;
     private List<GrantedAuthority> authorities;
 
     public MyUserDetails(User user) {
+        this.isEnabled = user.isEnable();
         this.username = user.getUsername();
         this.password = user.getPassword();
         this.authorities = Arrays.stream(user.getRole().toString().split(","))
@@ -55,6 +57,6 @@ public class MyUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return isEnabled;
     }
 }
