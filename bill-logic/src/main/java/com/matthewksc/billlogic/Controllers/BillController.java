@@ -3,6 +3,7 @@ package com.matthewksc.billlogic.Controllers;
 import com.matthewksc.billlogic.Dao.UserRepository;
 import com.matthewksc.billlogic.Dao.entity.Bill;
 import com.matthewksc.billlogic.Services.BillService;
+import com.matthewksc.billlogic.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,27 +11,27 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/bill")
+@RequestMapping("/user/bills")
 public class BillController {
 
     private BillService billService;
-    private UserRepository userRepository;
+    private UserService userService;
 
     @Autowired
-    public BillController(BillService billService, UserRepository userRepository) {
+    public BillController(BillService billService, UserService userService) {
         this.billService = billService;
-        this.userRepository = userRepository;
+        this.userService = userService;
     }
 
-    @GetMapping
-    public Iterable<Bill> getAll(){
-        return billService.findAll();
+    @GetMapping("/{userId}/{billId}")
+    public Optional<Optional<Bill>> getBill(@PathVariable Long userId, @PathVariable Long billId){
+        return userService.getUserBill(userId, billId);
     }
 
-//    @GetMapping("/{id}")
-//    public Optional<Bill> getById(@PathVariable Long id){
-//        return billService.findById(id);
-//    }
+    @GetMapping("/{userId}")
+    public Optional<List<Bill>> userBills(@PathVariable Long userId){
+        return userService.getAllUserBills(userId);
+    }
 
     @PostMapping("/design")
     public Bill addBill(@RequestBody Bill bill){
@@ -45,11 +46,5 @@ public class BillController {
     @DeleteMapping
     public void deleteBill(Long id){
         billService.delete(id);
-    }
-
-    //for now listing bills for user
-    @GetMapping("/{username}")
-    public Optional<List<Bill>> userBills(@PathVariable String username){
-        return userRepository.findByUsername(username).map(user -> user.getBills());
     }
 }
