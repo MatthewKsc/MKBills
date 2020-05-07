@@ -5,7 +5,7 @@ spring:
     password: ksciuk12 #enter your password to database
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
   mail:
     host: smtp.gmail.com
     username: todo #enter email from whit will be send message with token
