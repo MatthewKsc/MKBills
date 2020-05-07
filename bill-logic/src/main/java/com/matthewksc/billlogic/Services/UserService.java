@@ -2,6 +2,7 @@ package com.matthewksc.billlogic.Services;
 
 import com.matthewksc.billlogic.Dao.TokenRepository;
 import com.matthewksc.billlogic.Dao.UserRepository;
+import com.matthewksc.billlogic.Dao.entity.Bill;
 import com.matthewksc.billlogic.Dao.entity.Role;
 import com.matthewksc.billlogic.Dao.entity.Token;
 import com.matthewksc.billlogic.Dao.entity.User;
@@ -9,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service

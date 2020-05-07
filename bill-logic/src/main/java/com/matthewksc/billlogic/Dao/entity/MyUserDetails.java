@@ -19,6 +19,7 @@ public class MyUserDetails implements UserDetails {
         this.isEnabled = user.isEnable();
         this.username = user.getUsername();
         this.password = user.getPassword();
+        //convert enum type to string and separate each role
         this.authorities = Arrays.stream(user.getRole().toString().split(","))
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());

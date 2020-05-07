@@ -48,8 +48,8 @@ public class BillController {
     }
 
     //for now listing bills for user
-    @GetMapping("/{userID}")
-    public Optional<List<Bill>> userBills(@PathVariable Long userID){
-        return userRepository.findById(userID).map(user -> user.getBills());
+    @GetMapping("/{username}")
+    public Optional<List<Bill>> userBills(@PathVariable String username){
+        return userRepository.findByUsername(username).map(user -> user.getBills());
     }
 }

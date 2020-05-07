@@ -25,6 +25,7 @@ public class start {
         mati.setAddress("Somewhere");
         mati.setEmail("mati@wp.pl");
         mati.setRole(Role.ROLE_USER);
+        mati.setEnable(true);
 
         User mati2 = new User();
         mati2.setUsername("admin");
@@ -33,6 +34,7 @@ public class start {
         mati2.setAddress("Somewhere");
         mati2.setEmail("matiadmin@wp.pl");
         mati2.setRole(Role.ROLE_ADMIN);
+        mati2.setEnable(true);
 
 
         List<Bill> bills = new ArrayList<>();

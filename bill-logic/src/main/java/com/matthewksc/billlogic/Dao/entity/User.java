@@ -12,14 +12,15 @@ public class User{
     private String username;
     private String password;
     @Enumerated(EnumType.STRING)
-    private Role role;
+    private Role role; //EnumType for sql database
+
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_user", referencedColumnName = "user_id")
     private List<Bill> bills = new ArrayList<>();
     private String email;
     private String country;
     private String address;
-    private boolean isEnable;
+    private boolean isEnable; //for MyUserDetails
 
     public Long getUser_id() {
         return user_id;

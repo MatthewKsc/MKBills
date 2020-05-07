@@ -10,7 +10,7 @@ public class Bill {
     private Long bill_id;
     private String Tittle;
     @Enumerated(EnumType.STRING)
-    private Category category;
+    private Category category; //EnumType for sql database
     private Double Price;
     private String Description;
 

@@ -6,11 +6,14 @@ import com.matthewksc.billlogic.Dao.UserRepository;
 import com.matthewksc.billlogic.Dao.entity.Token;
 import com.matthewksc.billlogic.Dao.entity.User;
 import com.matthewksc.billlogic.Services.UserService;
+import javassist.NotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Optional;
 
 @Controller
 public class MainController {
@@ -38,16 +41,19 @@ public class MainController {
     }
 
     @GetMapping("/token")
-    public String singUp(@RequestParam String value){
-        Token byValue = tokenRepository.findTokeByValue(value);
-        User user = byValue.getUser();
+    public String singUp(@RequestParam String value) throws NotFoundException {
+        //handling exception if token even exists
+        Optional<Token> byValue = tokenRepository.findTokeByValue(value);
+        byValue.orElseThrow(()-> new NotFoundException("Not found token: "+value));
+
+        User user = byValue.get().getUser();
         user.setEnable(true);
         userRepository.save(user);
         return "hello";
     }
 
 
-//    //todo main said for now for security
+//    //todo main site
 //    @GetMapping("/main")
 //    public String main(){
 //        return "Main";
