@@ -62,4 +62,10 @@ public class UserService {
     public Optional<List<Bill>> getAllUserBills(Long userId){
         return userRepository.findById(userId).map(user -> user.getBills());
     }
+
+    //finding user and setting new bill then saving bill in repository
+    public Bill addUserBill(Long userId, Bill bill){
+        userRepository.findById(userId).get().addBill(bill);
+        return billRepository.save(bill);
+    }
 }

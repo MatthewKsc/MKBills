@@ -107,4 +107,8 @@ public class User{
                 ", address='" + address + '\'' +
                 '}';
     }
+
+    public void addBill(Bill bills) {
+        this.bills.add(bills);
+    }
 }

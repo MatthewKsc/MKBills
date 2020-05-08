@@ -2,11 +2,13 @@ package com.matthewksc.billlogic.Controllers;
 
 import com.matthewksc.billlogic.Dao.UserRepository;
 import com.matthewksc.billlogic.Dao.entity.Bill;
+import com.matthewksc.billlogic.Dao.entity.User;
 import com.matthewksc.billlogic.Services.BillService;
 import com.matthewksc.billlogic.Services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,11 +18,13 @@ public class BillController {
 
     private BillService billService;
     private UserService userService;
+    private UserRepository userRepository;
 
     @Autowired
-    public BillController(BillService billService, UserService userService) {
+    public BillController(BillService billService, UserService userService, UserRepository userRepository) {
         this.billService = billService;
         this.userService = userService;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/{userId}/{billId}")
@@ -33,14 +37,14 @@ public class BillController {
         return userService.getAllUserBills(userId);
     }
 
-    @PostMapping("/design")
-    public Bill addBill(@RequestBody Bill bill){
-        return billService.save(bill);
+    @PostMapping("/{userId}/design")
+    public Bill addBill(@PathVariable Long userId,@RequestBody Bill bill){
+        return userService.addUserBill(userId, bill);
     }
 
-    @PutMapping("/update")
-    public Bill updateBill(@RequestBody Bill bill){
-        return billService.save(bill);
+    @PutMapping("/{userId}/update")
+    public Bill updateBill(@PathVariable Long userId, @RequestBody Bill bill){
+        return userService.addUserBill(userId, bill);
     }
 
     @DeleteMapping

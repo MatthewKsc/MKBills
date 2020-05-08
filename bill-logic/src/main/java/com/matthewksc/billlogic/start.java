@@ -52,9 +52,9 @@ public class start {
         bills.add(bill1);
         bills.add(bill2);
         mati.setBills(bills);
+
         userRepository.save(mati);
         userRepository.save(mati2);
-
         billRepository.save(bill1);
         billRepository.save(bill2);
     }
