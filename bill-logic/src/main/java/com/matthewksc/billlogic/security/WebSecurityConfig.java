@@ -16,7 +16,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private UserDetailsServiceImpl userDetailsService;
 
-    @Autowired
     public WebSecurityConfig(UserDetailsServiceImpl userDetailsService){
         this.userDetailsService = userDetailsService;
     }
@@ -26,6 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService);
     }
 
+    //todo change antmachters
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();

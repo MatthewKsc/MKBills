@@ -1,14 +1,9 @@
 package com.matthewksc.billlogic.Controllers;
 
-import com.matthewksc.billlogic.Dao.UserRepository;
 import com.matthewksc.billlogic.Dao.entity.Bill;
-import com.matthewksc.billlogic.Dao.entity.User;
 import com.matthewksc.billlogic.Services.BillService;
 import com.matthewksc.billlogic.Services.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,13 +13,10 @@ public class BillController {
 
     private BillService billService;
     private UserService userService;
-    private UserRepository userRepository;
 
-    @Autowired
-    public BillController(BillService billService, UserService userService, UserRepository userRepository) {
+    public BillController(BillService billService, UserService userService) {
         this.billService = billService;
         this.userService = userService;
-        this.userRepository = userRepository;
     }
 
     @GetMapping("/{userId}/{billId}")
@@ -47,8 +39,8 @@ public class BillController {
         return userService.addUserBill(userId, bill);
     }
 
-    @DeleteMapping
-    public void deleteBill(Long id){
-        billService.delete(id);
+    @DeleteMapping("/{billId}")
+    public void deleteBill(@PathVariable Long billId) {
+        billService.delete(billId);
     }
 }

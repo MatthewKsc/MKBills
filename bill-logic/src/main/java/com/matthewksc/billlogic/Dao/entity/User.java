@@ -108,7 +108,7 @@ public class User{
                 '}';
     }
 
-    public void addBill(Bill bills) {
-        this.bills.add(bills);
+    public void addBill(Bill bill) {
+        this.bills.add(bill);
     }
 }

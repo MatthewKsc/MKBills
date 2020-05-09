@@ -9,7 +9,6 @@ import com.matthewksc.billlogic.Dao.entity.Token;
 import com.matthewksc.billlogic.Dao.entity.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import javax.mail.MessagingException;
 import java.util.List;
 import java.util.Optional;
