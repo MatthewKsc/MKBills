@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class MainController {
 
-    @GetMapping("/MkBills")
+    @GetMapping("/mkbills")
     public String domain(){
         return "main/side";
     }

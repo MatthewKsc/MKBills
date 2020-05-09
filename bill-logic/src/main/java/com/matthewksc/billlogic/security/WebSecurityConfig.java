@@ -31,13 +31,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.headers().disable();
         http.authorizeRequests()
-                .antMatchers("/main").permitAll()
+                .antMatchers("/mkbills").permitAll()
                 .antMatchers("/admin").hasRole("ADMIN")
-                .antMatchers("/bill").authenticated()
-                .antMatchers("/bill/**").authenticated()
+                .antMatchers("/user/bills").authenticated()
+                .antMatchers("/user/bills/**").authenticated()
                 .and()
                     .formLogin()
-                        .defaultSuccessUrl("/authenticated");
+                        .defaultSuccessUrl("/mkbills");
         //.antMatchers(HttpMethod.OPTIONS).permitAll() //for angular
     }
 

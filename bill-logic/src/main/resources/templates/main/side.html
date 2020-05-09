@@ -14,6 +14,9 @@
 <p>Register here: <a href="/sing-up">Sing up</a></p>
 <br>
 <br>
-<p>If you are logged come here to see your bills or create new one-><a href="/user/bills/1">Bills</a></p>
+<p>If you are logged come here to see your bills or create new one->
+    <a href="/user/bills/1"+>Bills</a></p>
+<!--for now its hardcoded userId need to add @ModelAttribute in controller and this here:-->
+<!--'+'${#authentication.getPrincipal().getUser().getUser_id()}-->
 </body>
 </html>
