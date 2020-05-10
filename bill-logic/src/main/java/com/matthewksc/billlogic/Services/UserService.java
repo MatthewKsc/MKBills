@@ -1,6 +1,5 @@
 package com.matthewksc.billlogic.Services;
 
-import com.matthewksc.billlogic.Dao.BillRepository;
 import com.matthewksc.billlogic.Dao.TokenRepository;
 import com.matthewksc.billlogic.Dao.UserRepository;
 import com.matthewksc.billlogic.Dao.entity.Bill;
@@ -10,22 +9,21 @@ import com.matthewksc.billlogic.Dao.entity.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
 public class UserService {
 
-    private BillRepository billRepository;
+    private BillService billService;
     private UserRepository userRepository;
     private TokenRepository tokenRepository;
     private PasswordEncoder passwordEncoder;
     private MailService mailService;
 
-    public UserService(BillRepository billRepository, UserRepository userRepository, TokenRepository tokenRepository,
+    public UserService(BillService billService, UserRepository userRepository, TokenRepository tokenRepository,
                        PasswordEncoder passwordEncoder, MailService mailService) {
-        this.billRepository = billRepository;
+        this.billService = billService;
         this.userRepository = userRepository;
         this.tokenRepository = tokenRepository;
         this.passwordEncoder = passwordEncoder;
@@ -53,18 +51,21 @@ public class UserService {
         }
     }
     // return one bill by id
-    public Optional<Optional<Bill>> getUserBill(Long userId, Long billId){
-        return userRepository.findById(userId).map(user -> {
-            return billRepository.findById(billId);});
+    public Optional<Bill> getUserBill(Long userId, Long billId){
+        return userRepository.findById(userId).map(user -> billService.findById(billId));
     }
     //returning all bills of specific user
-    public Optional<List<Bill>> getAllUserBills(Long userId){
-        return userRepository.findById(userId).map(user -> user.getBills());
+    public Optional<Iterable<Bill>> getAllUserBills(Long userId){
+        return userRepository.findById(userId).map(user -> billService.findAll());
     }
 
     //finding user and setting new bill then saving bill in repository
     public Bill addUserBill(Long userId, Bill bill){
-        userRepository.findById(userId).get().addBill(bill);
-        return billRepository.save(bill);
+        userRepository.findById(userId).ifPresent(user -> user.addBill(bill));
+        return billService.save(bill);
+    }
+
+    public void save(User user) {
+        userRepository.save(user);
     }
 }

@@ -2,10 +2,8 @@ package com.matthewksc.billlogic.Services;
 
 import com.matthewksc.billlogic.Dao.entity.Bill;
 import com.matthewksc.billlogic.Dao.BillRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.matthewksc.billlogic.Exeptions.NotFoundBillException;
 import org.springframework.stereotype.Service;
-
-import java.util.Optional;
 
 @Service
 public class BillService {
@@ -20,8 +18,8 @@ public class BillService {
         return billRepository.findAll();
     }
 
-    public Optional<Bill> findById(Long id){
-        return billRepository.findById(id);
+    public Bill findById(Long id){
+        return billRepository.findById(id).orElseThrow(()->new NotFoundBillException(id));
     }
 
     public Bill save(Bill bill){

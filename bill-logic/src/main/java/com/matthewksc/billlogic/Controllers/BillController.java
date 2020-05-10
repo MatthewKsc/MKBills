@@ -4,7 +4,7 @@ import com.matthewksc.billlogic.Dao.entity.Bill;
 import com.matthewksc.billlogic.Services.BillService;
 import com.matthewksc.billlogic.Services.UserService;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
+
 import java.util.Optional;
 
 @RestController
@@ -20,12 +20,12 @@ public class BillController {
     }
 
     @GetMapping("/{userId}/{billId}")
-    public Optional<Optional<Bill>> getBill(@PathVariable Long userId, @PathVariable Long billId){
+    public Optional<Bill> getBill(@PathVariable Long userId, @PathVariable Long billId){
         return userService.getUserBill(userId, billId);
     }
 
     @GetMapping("/{userId}")
-    public Optional<List<Bill>> userBills(@PathVariable Long userId){
+    public Optional<Iterable<Bill>> userBills(@PathVariable Long userId){
         return userService.getAllUserBills(userId);
     }
 

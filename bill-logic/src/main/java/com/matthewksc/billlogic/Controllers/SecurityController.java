@@ -20,12 +20,10 @@ public class SecurityController {
 
     private UserService userService;
     private TokenRepository tokenRepository;
-    private UserRepository userRepository;
 
-    public SecurityController(UserService userService, TokenRepository tokenRepository, UserRepository userRepository) {
+    public SecurityController(UserService userService, TokenRepository tokenRepository) {
         this.userService = userService;
         this.tokenRepository = tokenRepository;
-        this.userRepository = userRepository;
     }
 
     @GetMapping("/sing-up")
@@ -48,7 +46,7 @@ public class SecurityController {
 
         User user = byValue.get().getUser();
         user.setEnable(true);
-        userRepository.save(user);
+        userService.save(user);
         return "main/side";
     }
 }
