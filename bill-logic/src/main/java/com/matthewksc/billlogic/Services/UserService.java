@@ -6,10 +6,10 @@ import com.matthewksc.billlogic.Dao.entity.Bill;
 import com.matthewksc.billlogic.Dao.entity.Role;
 import com.matthewksc.billlogic.Dao.entity.Token;
 import com.matthewksc.billlogic.Dao.entity.User;
+import com.matthewksc.billlogic.Exeptions.NotFoundUserException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -51,12 +51,18 @@ public class UserService {
         }
     }
     // return one bill by id
-    public Optional<Bill> getUserBill(Long userId, Long billId){
-        return userRepository.findById(userId).map(user -> billService.findById(billId));
+    public Bill getUserBill(Long userId, Long billId){
+        return userRepository
+                .findById(userId)
+                .map(user-> user.getBill(billService.findById(billId)))
+                //exception of no bill handled in User getBill method
+                .orElseThrow(()->new NotFoundUserException(userId));
     }
     //returning all bills of specific user
-    public Optional<Iterable<Bill>> getAllUserBills(Long userId){
-        return userRepository.findById(userId).map(user -> billService.findAll());
+    public Iterable<Bill> getAllUserBills(Long userId){
+        return userRepository.findById(userId)
+                .map(User::getBills)
+                .orElseThrow(()->new NotFoundUserException(userId));
     }
 
     //finding user and setting new bill then saving bill in repository
@@ -65,6 +71,7 @@ public class UserService {
         return billService.save(bill);
     }
 
+    //save user
     public void save(User user) {
         userRepository.save(user);
     }

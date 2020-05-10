@@ -1,5 +1,8 @@
 package com.matthewksc.billlogic.Dao.entity;
 
+import com.matthewksc.billlogic.Exeptions.NotFoundBillException;
+import com.matthewksc.billlogic.Services.BillService;
+
 import javax.persistence.*;
 import java.util.*;
 
@@ -110,5 +113,13 @@ public class User{
 
     public void addBill(Bill bill) {
         this.bills.add(bill);
+    }
+
+    //need to get exactly one bill form list
+    public Bill getBill(Bill bill) {
+        return this.bills.parallelStream()
+                .filter(bill1 -> bill1.equals(bill))
+                .findFirst()
+                .orElseThrow(() -> new NotFoundBillException(bill.getBill_id()));
     }
 }
