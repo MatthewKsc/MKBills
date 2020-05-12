@@ -67,7 +67,9 @@ public class UserService {
 
     //finding user and setting new bill then saving bill in repository
     public Bill addUserBill(Long userId, Bill bill){
-        userRepository.findById(userId).ifPresent(user -> user.addBill(bill));
+        userRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundUserException(userId))
+                .addBill(bill);
         return billService.save(bill);
     }
 
