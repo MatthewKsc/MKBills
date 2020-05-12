@@ -10,12 +10,13 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BillServiceTest {
@@ -48,10 +49,21 @@ public class BillServiceTest {
 
     @Test
     public void save() {
+        Bill bill = new Bill();
+        Bill bill2 = new Bill();
+        given(billRepository.save(bill)).willReturn(bill);
+
+        assertEquals(bill, billService.save(bill));
+        assertNotEquals(bill, billService.save(bill2));
     }
 
     @Test
     public void delete() {
+        Bill bill = new Bill();
+        bill.setBill_id(1L);
+        billService.delete(1L);
+
+        verify(billRepository, times(1)).deleteById(1L);
     }
 
     public List<Bill> initData(){
