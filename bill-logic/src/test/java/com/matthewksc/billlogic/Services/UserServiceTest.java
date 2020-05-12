@@ -1,28 +1,28 @@
 package com.matthewksc.billlogic.Services;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
-class UserServiceTest {
+public class UserServiceTest {
 
     @Test
-    void addUser() {
+    public void addUser() {
     }
 
     @Test
-    void getUserBill() {
+    public void getUserBill() {
     }
 
     @Test
-    void getAllUserBills() {
+    public void getAllUserBills() {
     }
 
     @Test
-    void addUserBill() {
+    public void addUserBill() {
     }
 
     @Test
-    void save() {
+    public void save() {
     }
 }
