@@ -11,9 +11,4 @@ public class MainController {
         return "main/side";
     }
 
-    @GetMapping("/admin")
-    public String admin(){
-        return "main/admin";
-    }
-
 }

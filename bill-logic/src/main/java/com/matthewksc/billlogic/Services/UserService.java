@@ -10,7 +10,9 @@ import com.matthewksc.billlogic.Exeptions.NotFoundUserException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import javax.mail.MessagingException;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -71,6 +73,14 @@ public class UserService {
                 .orElseThrow(() -> new NotFoundUserException(userId))
                 .addBill(bill);
         return billService.save(bill);
+    }
+
+    public List<User> findAllUsers(){
+        return userRepository
+                .findAll()
+                .parallelStream()
+                .filter(user -> user.getRole().equals(Role.ROLE_USER))
+                .collect(Collectors.toList());
     }
 
     //save user

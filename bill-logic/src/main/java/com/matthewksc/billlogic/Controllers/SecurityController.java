@@ -52,6 +52,6 @@ public class SecurityController {
         User user = byValue.get().getUser();
         user.setEnable(true);
         userService.save(user);
-        return "main/side";
+        return "authorized";
     }
 }

@@ -10,12 +10,23 @@
 <br>
 <p>This web is provided to user's that want clare view of their payment's</p>
 <p>To get access to creating bills etc. you need to be log in</p>
-<p>Login in here: <a href="/login">Sing in</a></p>
-<p>Register here: <a href="/sing-up">Sing up</a></p>
+<p>
+    Login in here:
+    <button type="button"><a href="/login">Sing in</a></button>
+</p>
+<p>
+    Register here:
+    <button type="button"><a href="/sing-up">Sing up</a></button>
+</p>
 <br>
 <br>
-<p>If you are logged come here to see your bills or create new one->
-    <a href="/user/bills/1"+>Bills</a></p>
+<p>
+    If you are logged come here to see your bills or create new one:
+    <button type="button"><a href="/user/bills/1"+>Bills</a></button>
+</p>
+
+<p>Admin panel <button type="button"><a href="/admin">Pannel</a></button> </p>
+<button type="button"><a href="/logout">logout</a></button>
 <!--for now its hardcoded userId need to add @ModelAttribute in controller and this here:-->
 <!--'+'${#authentication.getPrincipal().getUser().getUser_id()}-->
 </body>
