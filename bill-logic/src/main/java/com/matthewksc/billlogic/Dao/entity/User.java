@@ -1,9 +1,9 @@
 package com.matthewksc.billlogic.Dao.entity;
 
 import com.matthewksc.billlogic.Exeptions.NotFoundBillException;
-import com.matthewksc.billlogic.Services.BillService;
-
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.util.*;
 
 @Entity
@@ -12,14 +12,20 @@ public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long user_id;
+
+    @NotBlank(message = "Username is required")
     private String username;
+    @NotBlank(message = "Password is required")
     private String password;
+
     @Enumerated(EnumType.STRING)
     private Role role; //EnumType for sql database
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_user", referencedColumnName = "user_id")
     private List<Bill> bills = new ArrayList<>();
+
+    @Email(message = "Email is required")
     private String email;
     private String country;
     private String address;
