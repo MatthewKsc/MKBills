@@ -26,6 +26,11 @@ public class SecurityController {
         this.tokenRepository = tokenRepository;
     }
 
+    @GetMapping("/login")
+    public String loginPage(){
+        return "login";
+    }
+
     @GetMapping("/sing-up")
     public String singUp(Model model){
         model.addAttribute("user", new User());

@@ -34,6 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/user/bills/**").authenticated()
                 .and()
                     .formLogin()
+                        .loginPage("/login")
                         .defaultSuccessUrl("/mkbills");
         //.antMatchers(HttpMethod.OPTIONS).permitAll() //for angular
     }
