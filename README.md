@@ -14,7 +14,6 @@ api(Repositories and Entity's).
 * `src\main\java\com\matthewksc\billlogic\Exeptions:` Folder for custom exeptions for bills and users (Simple outputs).
   _//todo better outputs to user_
 * `src\main\java\com\matthewksc\billlogic\security:` Security  folder to load user's and secure endpoints in api (simple-auth).
-  _//todo JWT token_
 * `src\main\java\com\matthewksc\billlogic\Services:` Folder with main logic (methods for user's, bill's and javamailsender ).
 * `src\main\resources\templates:` Simple front-end just to see how api is working.
   _//todo Angular as front_
