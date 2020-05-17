@@ -1,3 +1,6 @@
+application:
+  rememberMe:
+    key: "secretTokenHashKey21GA21-21FSAGSAW"
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/bills?useLegacyDatetimeCode=false&serverTimezone=UTC

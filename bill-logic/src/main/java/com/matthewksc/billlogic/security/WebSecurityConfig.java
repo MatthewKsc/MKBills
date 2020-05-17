@@ -1,5 +1,6 @@
 package com.matthewksc.billlogic.security;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -7,11 +8,13 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
 import java.util.concurrent.TimeUnit;
 
 @Configuration
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Value("${application.rememberMe.key}")
+    private String key;
 
     private UserDetailsServiceImpl userDetailsService;
 
@@ -24,10 +27,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService);
     }
 
-    //todo change antmachters
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable(); //disable for propose of creating api
+        http.csrf().disable(); //disable for purpose of creating api
         http.headers().disable();
         http.authorizeRequests()
                 .antMatchers("/mkbills").permitAll()
@@ -41,9 +43,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         .usernameParameter("username")
                         .defaultSuccessUrl("/mkbills")
                 .and()
-                    .rememberMe() //by defualt setting this to 2 weaks
+                    .rememberMe() //by default setting this to 2 weak's
                     .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(21))
-                    .key("secretTokenHashKey") //todo key read from application.yml
+                    .key(key)
                     .rememberMeParameter("remember-me")
                 .and()
                     .logout()
