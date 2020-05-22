@@ -62,9 +62,8 @@ public class UserService {
     }
     //returning all bills of specific user
     public Iterable<Bill> getAllUserBills(Long userId){
-        return userRepository.findById(userId)
-                .map(User::getBills)
-                .orElseThrow(()->new NotFoundUserException(userId));
+        return userRepository.findBillsByUser_id(userId);
+
     }
 
     //finding user and setting new bill then saving bill in repository

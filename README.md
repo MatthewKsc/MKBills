@@ -16,5 +16,4 @@ api(Repositories and Entity's).
 * `src\main\java\com\matthewksc\billlogic\security:` Security  folder to load user's and secure endpoints in api (simple-auth).
 * `src\main\java\com\matthewksc\billlogic\Services:` Folder with main logic (methods for user's, bill's and javamailsender ).
 * `src\main\resources\templates:` Simple front-end just to see how api is working.
-  _//todo Angular as front_
 * `src\test\java\com\matthewksc\billlogic\Services:` Simple testing with mockito and JUnit.
