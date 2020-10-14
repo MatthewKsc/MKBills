@@ -1,9 +1,7 @@
 package com.matthewksc.billlogic.Services;
 
-import com.matthewksc.billlogic.Dao.BillRepository;
 import com.matthewksc.billlogic.Dao.UserRepository;
 import com.matthewksc.billlogic.Dao.entity.Bill;
-import com.matthewksc.billlogic.Dao.entity.Role;
 import com.matthewksc.billlogic.Dao.entity.User;
 import com.matthewksc.billlogic.Exeptions.NotFoundBillException;
 import com.matthewksc.billlogic.Exeptions.NotFoundUserException;
@@ -14,11 +12,13 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -70,8 +70,10 @@ public class UserServiceTest {
     public void getAllUserBills() {
         User user = initData();
         User userNoList = new User();
-        given(userRepository.findById(1L)).willReturn(java.util.Optional.ofNullable(user));
-        given(userRepository.findById(2L)).willReturn(java.util.Optional.ofNullable(userNoList));
+        given(userRepository.findById(1L)).willReturn(Optional.ofNullable(user));
+        given(userRepository.findById(2L)).willReturn(Optional.of(userNoList));
+        given(userRepository.findBillsByUser_id(1L)).willReturn(user.getBills());
+        given(userRepository.findBillsByUser_id(2L)).willReturn(userNoList.getBills());
 
         List<Bill> billList = (List<Bill>) userService.getAllUserBills(1L);
         List<Bill> noElementsList = (List<Bill>) userService.getAllUserBills(2L);

@@ -9,6 +9,7 @@ import com.matthewksc.billlogic.Dao.entity.User;
 import com.matthewksc.billlogic.Exeptions.NotFoundUserException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import javax.mail.MessagingException;
 import java.util.List;
 import java.util.UUID;
@@ -62,8 +63,11 @@ public class UserService {
     }
     //returning all bills of specific user
     public Iterable<Bill> getAllUserBills(Long userId){
-        return userRepository.findBillsByUser_id(userId);
-
+        if (userRepository.findById(userId).isPresent()){
+            return userRepository.findBillsByUser_id(userId);
+        }else{
+            throw new NotFoundUserException(userId);
+        }
     }
 
     //finding user and setting new bill then saving bill in repository
